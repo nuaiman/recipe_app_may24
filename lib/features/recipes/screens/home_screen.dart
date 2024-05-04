@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipes_app_may24/core/constants/svg_constants.dart';
 import 'package:recipes_app_may24/core/notifiers/loader_notifier.dart';
-import 'package:recipes_app_may24/features/recipes/controllers/recipes_controller.dart';
+import 'package:recipes_app_may24/features/recipes/notifiers/recipes_notifier.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:recipes_app_may24/features/recipes/screens/recipe_details_screen.dart';
+import 'package:recipes_app_may24/models/recipe_details.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -33,6 +34,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final recipes = ref.watch(recipesProvider);
     final isLoading = ref.watch(loaderProvider);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -139,11 +141,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               ),
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width,
-                                child: Image.network(
-                                  recipe.imageUrl,
-                                  height:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  fit: BoxFit.cover,
+                                child: Hero(
+                                  tag: recipe.id,
+                                  child: Image.network(
+                                    recipe.imageUrl,
+                                    height:
+                                        MediaQuery.of(context).size.width * 0.4,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
@@ -207,13 +212,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Widget buildIngredientsRow(List<String> ingredients) {
+  Widget buildIngredientsRow(List<Ingredient> ingredients) {
     List<Widget> children = [];
 
     if (ingredients.length <= 3) {
       for (int i = 0; i < ingredients.length; i++) {
         children.add(Text(
-          ingredients[i],
+          ingredients[i].name,
           style: const TextStyle(fontWeight: FontWeight.w600),
         ));
         if (i < ingredients.length - 1) {
@@ -229,7 +234,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     } else {
       for (int i = 0; i < 3; i++) {
         children.add(Text(
-          ingredients[i],
+          ingredients[i].name,
           style: const TextStyle(fontWeight: FontWeight.w600),
         ));
         if (i < 2) {
