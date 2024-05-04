@@ -32,7 +32,6 @@ class SaverNotifier extends StateNotifier<List<RecipeDetails>> {
       }
     }
     state = recipes;
-    print(state.length);
   }
 
   bool containsRecipe(int id) {

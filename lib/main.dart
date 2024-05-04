@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipes_app_may24/features/recipes/screens/home_screen.dart';
 
+import 'core/constants/palette.dart';
+
 void main() {
   runApp(const ProviderScope(child: RecipesApp()));
 }
@@ -18,8 +20,8 @@ class RecipesApp extends StatelessWidget {
           fontFamily: 'Quicksand',
           useMaterial3: true,
           appBarTheme: const AppBarTheme(
-            color: Colors.white,
-            surfaceTintColor: Colors.white,
+            color: Palette.white,
+            surfaceTintColor: Palette.white,
           ),
           scaffoldBackgroundColor: const Color(0xFFF9F9F9)),
       home: const HomeScreen(),
