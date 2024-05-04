@@ -15,7 +15,8 @@ class RecipesApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
+          fontFamily: 'Quicksand',
           useMaterial3: true,
           appBarTheme: const AppBarTheme(
             color: Colors.white,

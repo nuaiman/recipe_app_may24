@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
-import 'package:recipes_app_may24/constants/api_constants.dart';
+import 'package:recipes_app_may24/core/constants/api_constants.dart';
 
 import '../models/recipe.dart';
 import '../models/recipe_details.dart';
