@@ -4,6 +4,7 @@ import 'package:recipes_app_may24/core/constants/svg_constants.dart';
 import 'package:recipes_app_may24/core/notifiers/loader_notifier.dart';
 import 'package:recipes_app_may24/features/recipes/controllers/recipes_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:recipes_app_may24/features/recipes/screens/recipe_details_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -117,72 +118,85 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   final recipe = recipes[index];
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                      color: Colors.white,
-                      surfaceTintColor: Colors.white,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(12),
-                              topRight: Radius.circular(12),
-                            ),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              child: Image.network(
-                                recipe.imageUrl,
-                                height: MediaQuery.of(context).size.width * 0.4,
-                                fit: BoxFit.cover,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => RecipeDetailsScreen(
+                            recipe: recipe,
+                          ),
+                        ));
+                      },
+                      child: Card(
+                        color: Colors.white,
+                        surfaceTintColor: Colors.white,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipRRect(
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(12),
+                                topRight: Radius.circular(12),
+                              ),
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: Image.network(
+                                  recipe.imageUrl,
+                                  height:
+                                      MediaQuery.of(context).size.width * 0.4,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    recipe.name,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
+                            const SizedBox(height: 10),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 12),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      recipe.name,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 12.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      const Icon(
-                                        Icons.schedule,
-                                        size: 16,
-                                      ),
-                                      const SizedBox(width: 4),
-                                      Text(
-                                        '${recipe.duration} min',
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w600,
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 12.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const Icon(
+                                          Icons.schedule,
+                                          size: 16,
                                         ),
-                                      )
-                                    ],
+                                        const SizedBox(width: 4),
+                                        Text(
+                                          '${recipe.duration} min',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 4),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: buildIngredientsRow(recipe.ingredients),
-                          ),
-                          const SizedBox(height: 6),
-                        ],
+                            const SizedBox(height: 4),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 12),
+                              child: buildIngredientsRow(recipe.ingredients),
+                            ),
+                            const SizedBox(height: 6),
+                          ],
+                        ),
                       ),
                     ),
                   );
