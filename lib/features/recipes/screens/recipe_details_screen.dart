@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipes_app_may24/features/recipes/notifiers/serving_calculation_notifier.dart';
 import 'package:recipes_app_may24/models/recipe_details.dart';
@@ -25,7 +23,10 @@ class RecipeDetailsScreen extends ConsumerWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child: Image.network(recipe.imageUrl),
+                    child: Hero(
+                      tag: recipe.id,
+                      child: Image.network(recipe.imageUrl),
+                    ),
                   ),
                   Padding(
                     padding:

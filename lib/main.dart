@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'features/recipes/screens/search_recipe_screen.dart';
+import 'package:recipes_app_may24/features/recipes/screens/home_screen.dart';
 
 void main() {
   runApp(const ProviderScope(child: RecipesApp()));
@@ -23,7 +22,7 @@ class RecipesApp extends StatelessWidget {
             surfaceTintColor: Colors.white,
           ),
           scaffoldBackgroundColor: const Color(0xFFF9F9F9)),
-      home: const SearchRecipeScreen(),
+      home: const HomeScreen(),
     );
   }
 }

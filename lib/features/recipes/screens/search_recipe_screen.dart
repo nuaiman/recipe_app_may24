@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipes_app_may24/core/constants/svg_constants.dart';
 import 'package:recipes_app_may24/core/notifiers/loader_notifier.dart';
@@ -80,7 +79,7 @@ class _HomeScreenState extends ConsumerState<SearchRecipeScreen> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
+            child: TextField(
               onTapOutside: (event) {
                 FocusManager.instance.primaryFocus!.unfocus();
               },
@@ -101,7 +100,11 @@ class _HomeScreenState extends ConsumerState<SearchRecipeScreen> {
                       : const Icon(Icons.close),
                 ),
               ),
+              // onSubmitted: (value) {
+              //   ref.read(recipesProvider.notifier).searchRecipes(value);
+              // },
               onChanged: (value) {
+                () => clearSearch(ref);
                 ref.read(recipesProvider.notifier).searchRecipes(value);
               },
             ),
@@ -136,12 +139,15 @@ class _HomeScreenState extends ConsumerState<SearchRecipeScreen> {
                                   ),
                                   child: SizedBox(
                                     width: MediaQuery.of(context).size.width,
-                                    child: Image.network(
-                                      recipe.imageUrl,
-                                      height:
-                                          MediaQuery.of(context).size.width *
-                                              0.35,
-                                      fit: BoxFit.cover,
+                                    child: Hero(
+                                      tag: recipe.id,
+                                      child: Image.network(
+                                        recipe.imageUrl,
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.35,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),

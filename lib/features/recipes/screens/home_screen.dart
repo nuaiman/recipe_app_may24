@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipes_app_may24/features/recipes/screens/saved_recipe_screen.dart';
 import 'package:recipes_app_may24/features/recipes/screens/search_recipe_screen.dart';
 
+import '../notifiers/saver_notifier.dart';
+
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
@@ -27,7 +29,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   void didChangeDependencies() {
-    // ref.read(saverProvider.notifier).getAllRecipes();
+    ref.read(saverProvider.notifier).getAllRecipes();
     super.didChangeDependencies();
   }
 
