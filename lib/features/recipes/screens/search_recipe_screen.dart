@@ -7,14 +7,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:recipes_app_may24/features/recipes/screens/recipe_details_screen.dart';
 import 'package:recipes_app_may24/models/recipe_details.dart';
 
-class HomeScreen extends ConsumerStatefulWidget {
-  const HomeScreen({super.key});
+class SearchRecipeScreen extends ConsumerStatefulWidget {
+  const SearchRecipeScreen({super.key});
 
   @override
-  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<SearchRecipeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends ConsumerState<HomeScreen> {
+class _HomeScreenState extends ConsumerState<SearchRecipeScreen> {
   final searchController = TextEditingController();
 
   @override
@@ -145,8 +145,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   tag: recipe.id,
                                   child: Image.network(
                                     recipe.imageUrl,
-                                    height:
-                                        MediaQuery.of(context).size.width * 0.4,
+                                    height: MediaQuery.of(context).size.width *
+                                        0.35,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
