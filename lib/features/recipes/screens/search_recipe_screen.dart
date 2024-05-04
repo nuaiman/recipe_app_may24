@@ -39,16 +39,6 @@ class _HomeScreenState extends ConsumerState<SearchRecipeScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        // leading: isLoading
-        //     ? Center(
-        //         child: SizedBox(
-        //         height: 20,
-        //         width: 20,
-        //         child: CircularProgressIndicator(
-        //           color: Color(0xFFED6A32),
-        //         ),
-        //       ))
-        //     : const SizedBox.shrink(),
         title: Row(
           children: [
             SvgPicture.asset(Svgs.logo),

@@ -1,6 +1,6 @@
 name: recipes_app_may24
 description: "A new Flutter project."
-publish_to: 'none' 
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -14,6 +14,7 @@ dependencies:
   flutter_riverpod: ^2.5.1
   flutter_svg: ^2.0.10+1
   http: ^1.2.1
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_lints: ^3.0.0
