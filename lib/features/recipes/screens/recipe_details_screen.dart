@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipes_app_may24/features/recipes/notifiers/serving_calculation_notifier.dart';
 import 'package:recipes_app_may24/models/recipe_details.dart';
 
+import '../notifiers/saver_notifier.dart';
+
 class RecipeDetailsScreen extends ConsumerWidget {
   final RecipeDetails recipe;
   const RecipeDetailsScreen({super.key, required this.recipe});
@@ -13,6 +15,7 @@ class RecipeDetailsScreen extends ConsumerWidget {
         .read(servingCalculationProvider.notifier)
         .setRealServingCount(recipe.serving);
     ref.watch(servingCalculationProvider);
+    ref.watch(saverProvider);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -51,11 +54,22 @@ class RecipeDetailsScreen extends ConsumerWidget {
                           color: Colors.white.withOpacity(0.2),
                           surfaceTintColor: Colors.white.withOpacity(0.2),
                           child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.bookmark_outline,
-                              color: Colors.white,
-                            ),
+                            onPressed: () {
+                              ref
+                                  .read(saverProvider.notifier)
+                                  .saveOrRemoveRecipe(recipe);
+                            },
+                            icon: ref
+                                    .read(saverProvider.notifier)
+                                    .containsRecipe(recipe.id)
+                                ? Icon(
+                                    Icons.bookmark,
+                                    color: Colors.orange,
+                                  )
+                                : Icon(
+                                    Icons.bookmark_outline,
+                                    color: Colors.white,
+                                  ),
                           ),
                         ),
                       ],

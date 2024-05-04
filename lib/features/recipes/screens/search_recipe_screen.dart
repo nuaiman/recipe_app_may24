@@ -4,6 +4,7 @@ import 'package:recipes_app_may24/core/constants/svg_constants.dart';
 import 'package:recipes_app_may24/core/notifiers/loader_notifier.dart';
 import 'package:recipes_app_may24/features/recipes/notifiers/recipes_notifier.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:recipes_app_may24/features/recipes/notifiers/saver_notifier.dart';
 import 'package:recipes_app_may24/features/recipes/screens/recipe_details_screen.dart';
 import 'package:recipes_app_may24/models/recipe_details.dart';
 
@@ -34,7 +35,7 @@ class _HomeScreenState extends ConsumerState<SearchRecipeScreen> {
   Widget build(BuildContext context) {
     final recipes = ref.watch(recipesProvider);
     final isLoading = ref.watch(loaderProvider);
-
+    ref.watch(saverProvider);
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -159,11 +160,22 @@ class _HomeScreenState extends ConsumerState<SearchRecipeScreen> {
                                     surfaceTintColor:
                                         Colors.white.withOpacity(0.2),
                                     child: IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                        Icons.bookmark_outline,
-                                        color: Colors.white,
-                                      ),
+                                      onPressed: () {
+                                        ref
+                                            .read(saverProvider.notifier)
+                                            .saveOrRemoveRecipe(recipe);
+                                      },
+                                      icon: ref
+                                              .read(saverProvider.notifier)
+                                              .containsRecipe(recipe.id)
+                                          ? Icon(
+                                              Icons.bookmark,
+                                              color: Colors.orange,
+                                            )
+                                          : Icon(
+                                              Icons.bookmark_outline,
+                                              color: Colors.white,
+                                            ),
                                     ),
                                   ),
                                 ),

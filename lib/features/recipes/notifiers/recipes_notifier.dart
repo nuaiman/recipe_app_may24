@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipes_app_may24/core/notifiers/loader_notifier.dart';
 
 import '../../../apis/recipes_api.dart';
-import '../../../models/recipe.dart';
 import '../../../models/recipe_details.dart';
 
 class RecipesNotifier extends StateNotifier<List<RecipeDetails>> {

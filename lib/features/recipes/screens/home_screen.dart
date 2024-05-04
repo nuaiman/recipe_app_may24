@@ -29,7 +29,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   void didChangeDependencies() {
-    ref.read(saverProvider.notifier).getAllRecipes();
+    // ref.read(saverProvider.notifier).getAllRecipes();
     super.didChangeDependencies();
   }
 

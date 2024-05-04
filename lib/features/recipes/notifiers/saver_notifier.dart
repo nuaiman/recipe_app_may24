@@ -7,15 +7,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SaverNotifier extends StateNotifier<List<RecipeDetails>> {
   SaverNotifier() : super([]);
 
-  Future<void> saveOrRemoveRecipe(RecipeDetails recipe, int id) async {
+  Future<void> saveOrRemoveRecipe(RecipeDetails recipe) async {
     final prefs = await SharedPreferences.getInstance();
     final encodedRecipe = json.encode(recipe.toJson());
 
-    if (state.any((element) => element.id == id)) {
-      await prefs.remove(id.toString());
-      state = List.from(state)..removeWhere((recipe) => recipe.id == id);
+    if (state.any((element) => element.id == recipe.id)) {
+      await prefs.remove(recipe.id.toString());
+      state = List.from(state)..removeWhere((r) => r.id == recipe.id);
     } else {
-      await prefs.setString(id.toString(), encodedRecipe);
+      await prefs.setString(recipe.id.toString(), encodedRecipe);
       state = List.from(state)..add(recipe);
     }
   }
@@ -31,8 +31,8 @@ class SaverNotifier extends StateNotifier<List<RecipeDetails>> {
         recipes.add(RecipeDetails.fromJson(decodedRecipe));
       }
     }
-
     state = recipes;
+    print(state.length);
   }
 
   bool containsRecipe(int id) {
