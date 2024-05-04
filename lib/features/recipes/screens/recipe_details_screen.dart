@@ -25,10 +25,7 @@ class RecipeDetailsScreen extends ConsumerWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child: Hero(
-                      tag: recipe.id,
-                      child: Image.network(recipe.imageUrl),
-                    ),
+                    child: Image.network(recipe.imageUrl),
                   ),
                   Padding(
                     padding:

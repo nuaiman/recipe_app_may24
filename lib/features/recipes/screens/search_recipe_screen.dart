@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipes_app_may24/core/constants/svg_constants.dart';
 import 'package:recipes_app_may24/core/notifiers/loader_notifier.dart';
@@ -95,6 +96,8 @@ class _HomeScreenState extends ConsumerState<SearchRecipeScreen> {
               },
               controller: searchController,
               decoration: InputDecoration(
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
                 filled: true,
                 fillColor: const Color(0xFFF1F1F5),
                 hintText: 'Write Recipe Name',
@@ -134,23 +137,41 @@ class _HomeScreenState extends ConsumerState<SearchRecipeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ClipRRect(
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(12),
-                                topRight: Radius.circular(12),
-                              ),
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                child: Hero(
-                                  tag: recipe.id,
-                                  child: Image.network(
-                                    recipe.imageUrl,
-                                    height: MediaQuery.of(context).size.width *
-                                        0.35,
-                                    fit: BoxFit.cover,
+                            Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(12),
+                                    topRight: Radius.circular(12),
+                                  ),
+                                  child: SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Image.network(
+                                      recipe.imageUrl,
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.35,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
-                              ),
+                                Positioned(
+                                  top: 5,
+                                  right: 5,
+                                  child: Card(
+                                    color: Colors.white.withOpacity(0.2),
+                                    surfaceTintColor:
+                                        Colors.white.withOpacity(0.2),
+                                    child: IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.bookmark_outline,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 10),
                             Padding(
